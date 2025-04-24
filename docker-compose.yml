@@ -1,0 +1,32 @@
+services:
+  moodle:
+    image: bitnami/moodle:latest
+    container_name: moodle_app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./moodle_data:/bitnami/moodle
+    environment:
+      - MOODLE_USERNAME=admin
+      - MOODLE_PASSWORD=admin123
+      - MOODLE_EMAIL=admin@example.com
+      - MOODLE_SITE_NAME=MiMoodlePersonalizado
+      - MOODLE_DATABASE_TYPE=mariadb
+      - MOODLE_DATABASE_HOST=mariadb
+      - MOODLE_DATABASE_PORT_NUMBER=3306
+      - MOODLE_DATABASE_NAME=moodle
+      - MOODLE_DATABASE_USER=moodleuser
+      - MOODLE_DATABASE_PASSWORD=moodlepass
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: bitnami/mariadb:latest
+    container_name: mariadb_moodle
+    environment:
+      - MARIADB_ROOT_PASSWORD=rootpass
+      - MARIADB_DATABASE=moodle
+      - MARIADB_USER=moodleuser
+      - MARIADB_PASSWORD=moodlepass
+    volumes:
+      - ./mysql_data:/bitnami/mariadb
