@@ -3,7 +3,7 @@ services:
     image: bitnami/moodle:latest
     container_name: moodle_app
     ports:
-      - "8080:8080"
+      - "8082:8080"
     volumes:
       - ./moodle_data:/bitnami/moodle
     environment:
